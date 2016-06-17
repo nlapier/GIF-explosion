@@ -14,14 +14,37 @@
 <body>
 	<!-- Main container -->
 	<div class="container-fluid">
+
 		<div id="headline">
-			<h1>GIF EXPLOSION!</h1>
+			<h1 class="text-center">GIF EXPLOSION!</h1>
 		</div>
 
-		<div id="buttonDiv"></div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-2">
+				<div class="row">
+					<form class="form-inline">
+						<div class="form-group">
+						    <label class="sr-only">Add another button</label>
+						    <input type="text" class="form-control" id="searchForm" placeholder="Add a button">
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+					<br>
+				</div>
 
-		<div id="gifsDiv"></div>
+				<div class="row" id="buttonDiv">
+					<div class="btn-group-vertical" role="group" aria-label="Release the GIFs!">
+ 
+					</div>
+				</div>
 
+			</div>
+
+			<div class="col-sm-10" id="gifsDiv">
+				
+			</div>
+
+		</div>
 	</div>
 	<!-- /Main container -->
 	<!-- My JS --><script type="text/javascript" src="Assets/javascript/game.js"></script>
