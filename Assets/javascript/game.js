@@ -1,9 +1,15 @@
+var buttonIndex = 0;
 function insertButton(text){
-    var gifButton = "<button type='button' class='btn btn-default gifButton'>" + text + "</button>";
-    $("#buttonDiv").prepend(gifButton);
+    var buttonTypes = ["success", "info", "warning", "danger"];
+    if (text){
+        var gifButton = "<button type='button' class='btn btn-block gifButton btn-" + buttonTypes[buttonIndex] +  "'>" + text + "</button>";
+        $("#buttonDiv").prepend(gifButton);
+        buttonIndex++;
+    }
+    if(buttonIndex > 3){buttonIndex = 0}
 }
 
-var buttonArray = ["zebra", "elephant", "sheep"]
+var buttonArray = ["Bugs Bunny", "Tom and Jerry", "Road Runner"]
 var search = $("#searchBox").val();
 
 for (var i =0; i<buttonArray.length; i++){
@@ -13,17 +19,15 @@ for (var i =0; i<buttonArray.length; i++){
 $(".btn-primary").on('click', function(){
     var buttonText = $("#searchForm").val();
     insertButton(buttonText);
-    console.log("add gif click")
-    console.log("buttonText: " + buttonText)
     return false;
 
 })
 
-$('.gifButton').on('click', function() {
-    console.log(".gifButton click")
+$(".container-fluid").on("click", ".gifButton", function() {
 	var selectedGif = $(this).text();
-    console.log("selectedGif: " + selectedGif);
 	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + selectedGif + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+    $("#gifsDiv").empty();
 
     $.ajax({
         url: queryURL,
@@ -38,13 +42,19 @@ $('.gifButton').on('click', function() {
         for (var i = 0; i < results.length; i++) {
         	var animate = results[i].images.fixed_height.url;
         	var still = results[i].images.fixed_height_still.url;
-        	var gifBox = $("<div class ='gifBox'>");
-        	var gifImg = $("<img class = 'gifImg'>").attr("src", still);
-        	var rating = $("<p>").text("Rating: " + results[i].rating);
+        	var gifBox = $("<div class ='thumbnail'>");
+        	var gifImg = $("<img>").attr({
+                "src": still,
+                "class": "gifImg"
+            });
+        	var rating = $("<p class = 'caption'>").text("Rating: " + results[i].rating);
 
-            gifImg.data("animate", animate);
-            gifImg.data("still", still);
-            gifImg.data("state", true);
+            gifImg.data({
+                "animate": animate,
+                "still": still,
+                "state": true
+            });
+
             gifBox.append(gifImg);
             gifBox.append(rating);
 
