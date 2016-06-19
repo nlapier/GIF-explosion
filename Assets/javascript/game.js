@@ -13,10 +13,14 @@ for (var i =0; i<buttonArray.length; i++){
 $(".btn-primary").on('click', function(){
     var buttonText = $("#searchForm").val();
     insertButton(buttonText);
+    console.log("add gif click")
+    console.log("buttonText: " + buttonText)
+    return false;
+
 })
 
 $('.gifButton').on('click', function() {
-
+    console.log(".gifButton click")
 	var selectedGif = $(this).text();
     console.log("selectedGif: " + selectedGif);
 	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + selectedGif + "&api_key=dc6zaTOxFJmzC&limit=10";
@@ -32,16 +36,16 @@ $('.gifButton').on('click', function() {
         var results = response.data;
 
         for (var i = 0; i < results.length; i++) {
-        	var animate = results[i] + ".images.fixed_height.url";
-        	var still = results[i] + ".images.fixed_height_still.url";
-        	var gifBox = $("<div class='gifBox'>");
-        	var gif = $("<img>").attr("src", still);
+        	var animate = results[i].images.fixed_height.url;
+        	var still = results[i].images.fixed_height_still.url;
+        	var gifBox = $("<div class ='gifBox'>");
+        	var gifImg = $("<img class = 'gifImg'>").attr("src", still);
         	var rating = $("<p>").text("Rating: " + results[i].rating);
 
-            gifBox.data("animate", animate);
-            gifBox.data("still", still);
-            gifBox.data("state", true);
-            gifBox.append(gif);
+            gifImg.data("animate", animate);
+            gifImg.data("still", still);
+            gifImg.data("state", true);
+            gifBox.append(gifImg);
             gifBox.append(rating);
 
       		$("#gifsDiv").prepend(gifBox);
@@ -49,8 +53,10 @@ $('.gifButton').on('click', function() {
     })
 });
 
-$(".gifBox").on("click", function(){
+$(".container-fluid").on("click", ".gifImg", function(){
     var state = $(this).data('state');
+    console.log(".gifImg click");
+    console.log(state);
 
     if (state){
         $(this).attr("src", $(this).data("animate"));
@@ -61,8 +67,6 @@ $(".gifBox").on("click", function(){
         $(this).attr("src", $(this).data("still"));
         $(this).data("state", true);
     }
-
-
-}
+});
 
 
