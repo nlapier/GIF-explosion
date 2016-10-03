@@ -18,13 +18,12 @@ for (var i =0; i<buttonArray.length; i++){
 
 $(".btn-primary").on('click', function(){
     var buttonText = $("#searchForm").val();
-    buttonText = buttonText + " cartoon";
     insertButton(buttonText);
     return false;
 
 })
 
-$(".container-fluid").on("click", ".gifButton", function() {
+$(".container").on("click", ".gifButton", function() {
 	var selectedGif = $(this).text();
 	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + selectedGif + "&api_key=dc6zaTOxFJmzC&limit=10";
 
@@ -64,7 +63,7 @@ $(".container-fluid").on("click", ".gifButton", function() {
     })
 });
 
-$(".container-fluid").on("click", ".gifImg", function(){
+$(".container").on("click", ".gifImg", function(){
     var state = $(this).data('state');
     console.log(".gifImg click");
     console.log(state);
