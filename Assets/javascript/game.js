@@ -25,7 +25,7 @@ $(".btn-primary").on('click', function(){
 
 $(".container-fluid").on("click", ".gifButton", function() {
 	var selectedGif = $(this).text();
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + selectedGif + "&api_key=dc6zaTOxFJmzC&limit=10";
+	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + selectedGif + "&api_key=dc6zaTOxFJmzC&limit=10";
 
     $("#gifsDiv").empty();
 
