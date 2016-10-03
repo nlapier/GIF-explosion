@@ -18,6 +18,7 @@ for (var i =0; i<buttonArray.length; i++){
 
 $(".btn-primary").on('click', function(){
     var buttonText = $("#searchForm").val();
+    buttonText = buttonText + " cartoon";
     insertButton(buttonText);
     return false;
 
